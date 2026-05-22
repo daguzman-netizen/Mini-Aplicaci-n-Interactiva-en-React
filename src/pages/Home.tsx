@@ -1,42 +1,78 @@
-import { Button, Card, Typography, Space } from 'antd'
-import { Link } from 'react-router-dom'
+import { Card, Typography, Row, Col, Statistic,} from 'antd'
+import {CheckCircleOutlined, ClockCircleOutlined,} from '@ant-design/icons'
+import type { Task } from '../types/Task'
 
 const { Title, Paragraph } = Typography
 
-function Home() {
+interface Props {
+  tasks: Task[]
+}
+
+function Home({ tasks }: Props) {
+
+  const completed = tasks.filter(
+    task => task.completed
+  ).length
+
+  const pending = tasks.filter(
+    task => !task.completed
+  ).length
+
   return (
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        minHeight: '80vh',
-      }}
-    >
-      <Card style={{ width: 600, textAlign: 'center' }}>
 
-        <Title>Sistema de Gestión de Tareas</Title>
+    <div>
 
-        <Paragraph>
-          Organiza tus tareas y controla tu productividad.
-        </Paragraph>
+      <Title level={2}>
+        Bienvenido 👋
+      </Title>
 
-        <Space size="large">
-          <Link to="/tasks">
-            <Button type="primary" size="large">
-              Ir a tareas
-            </Button>
-          </Link>
+      <Paragraph
+        style={{
+          color: '#64748b',
+          marginBottom: 40,
+        }}
+      >
+        Organiza tareas, prioridades y productividad.
+      </Paragraph>
 
-          <Link to="/stats">
-            <Button size="large">
-              Ver estadísticas
-            </Button>
-          </Link>
-        </Space>
+      <Row gutter={20}>
 
-      </Card>
+        <Col span={12}>
+
+          <Card
+            style={{
+              borderRadius: 20,
+            }}
+          >
+            <Statistic
+              title="Tareas completadas"
+              value={completed}
+              prefix={<CheckCircleOutlined />}
+            />
+          </Card>
+
+        </Col>
+
+        <Col span={12}>
+
+          <Card
+            style={{
+              borderRadius: 20,
+            }}
+          >
+            <Statistic
+              title="Pendientes"
+              value={pending}
+              prefix={<ClockCircleOutlined />}
+            />
+          </Card>
+
+        </Col>
+
+      </Row>
+
     </div>
   )
 }
+
 export default Home

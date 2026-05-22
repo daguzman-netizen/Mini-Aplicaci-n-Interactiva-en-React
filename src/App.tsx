@@ -1,43 +1,68 @@
-import { Routes, Route } from "react-router-dom";
-import { useState } from "react";
+import { Layout } from 'antd'
+import { Routes, Route } from 'react-router-dom'
+import { useState } from 'react'
 
-import Navbar from "./components/Navbar";
-import Home from "./pages/Home";
-import Tasks from "./pages/Tasks";
-import Stats from "./pages/Stats";
+import Navbar from './components/Navbar'
 
-import type { Task } from "./types/Task";
+import Home from './pages/Home'
+import Tasks from './pages/Tasks'
+import Stats from './pages/Stats'
+
+import type { Task } from './types/Task'
+
+const { Content } = Layout
 
 function App() {
 
-  const [tasks, setTasks] = useState<Task[]>([]);
+  const [tasks, setTasks] = useState<Task[]>([])
 
   return (
-    <div>
+
+    <Layout
+      style={{
+        minHeight: '100vh',
+        background: '#f1f5f9',
+      }}
+    >
+
       <Navbar />
 
-      <Routes>
+      <Layout
+        style={{
+          marginLeft: 240,
+          padding: '30px',
+        }}
+      >
 
-        <Route path="/" element={<Home />} />
+        <Content>
 
-        <Route
-          path="/tasks"
-          element={
-            <Tasks
-              tasks={tasks}
-              setTasks={setTasks}
+          <Routes>
+
+            <Route path="/" element={<Home tasks={tasks} />}
             />
-          }
-        />
+            <Route
+              path="/tasks"
+              element={
+                <Tasks
+                  tasks={tasks}
+                  setTasks={setTasks}
+                />
+              }
+            />
 
-        <Route
-          path="/stats"
-          element={<Stats tasks={tasks} />}
-        />
+            <Route
+              path="/stats"
+              element={<Stats tasks={tasks} />}
+            />
 
-      </Routes>
-    </div>
-  );
+          </Routes>
+
+        </Content>
+
+      </Layout>
+
+    </Layout>
+  )
 }
 
-export default App;
+export default App

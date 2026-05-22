@@ -10,7 +10,7 @@ interface Props {
 function TaskItem({ task, toggleTask, deleteTask }: Props) {
 
   return (
-    <Card style={{ marginBottom: 15 }}>
+    <Card style={{ marginBottom: 20, borderRadius: 16, border: '1px solid #e2e8f0',}}>
 
       <Space direction="vertical" style={{ width: '100%' }}>
 

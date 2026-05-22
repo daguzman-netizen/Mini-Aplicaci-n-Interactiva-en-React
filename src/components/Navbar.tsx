@@ -1,26 +1,71 @@
-import { Menu } from 'antd'
-import { Link } from 'react-router-dom'
+import {
+  HomeOutlined,
+  UnorderedListOutlined,
+  BarChartOutlined,
+} from '@ant-design/icons'
+
+import { Layout, Menu } from 'antd'
+import { Link, useLocation } from 'react-router-dom'
+
+const { Sider } = Layout
 
 function Navbar() {
 
+  const location = useLocation()
+
   return (
-    <Menu
-      mode="horizontal"
-      items={[
-        {
-          key: '1',
-          label: <Link to="/">Home</Link>,
-        },
-        {
-          key: '2',
-          label: <Link to="/tasks">Tareas</Link>,
-        },
-        {
-          key: '3',
-          label: <Link to="/stats">Estadísticas</Link>,
-        },
-      ]}
-    />
+
+    <Sider
+      width={240}
+      style={{
+        height: '100vh',
+        position: 'fixed',
+        left: 0,
+        top: 0,
+        background: '#0f172a',
+      }}
+    >
+
+      <div
+        style={{
+          color: 'white',
+          fontSize: 24,
+          fontWeight: 'bold',
+          padding: 25,
+          textAlign: 'center',
+        }}
+      >
+        TaskFlow
+      </div>
+
+      <Menu
+        theme="dark"
+        mode="inline"
+        selectedKeys={[location.pathname]}
+        style={{
+          background: '#0f172a',
+          borderRight: 'none',
+        }}
+        items={[
+          {
+            key: '/',
+            icon: <HomeOutlined />,
+            label: <Link to="/">Dashboard</Link>,
+          },
+          {
+            key: '/tasks',
+            icon: <UnorderedListOutlined />,
+            label: <Link to="/tasks">Tareas</Link>,
+          },
+          {
+            key: '/stats',
+            icon: <BarChartOutlined />,
+            label: <Link to="/stats">Estadísticas</Link>,
+          },
+        ]}
+      />
+
+    </Sider>
   )
 }
 

@@ -36,7 +36,8 @@ function Tasks({ tasks, setTasks }: Props) {
   };
 
   return (
-    <div style={{ padding: 30 }}>
+    <div style={{ background: 'white', padding: 30, borderRadius: 20, boxShadow: '0 4px 15px rgba(0,0,0,0.05)',}}
+>
       <h1>Tareas</h1>
 
       <TaskForm addTask={addTask} />
